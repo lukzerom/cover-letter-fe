@@ -40,6 +40,7 @@ function App() {
       careerChange: false,
       roleLevel: "mid-level",
       language: "english",
+      temperature: 0.7,
     });
   const [coverLetter, setCoverLetter] = useState("");
   const [isLoading, setIsLoading] = useState(false);

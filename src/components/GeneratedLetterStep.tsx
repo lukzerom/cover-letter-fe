@@ -22,7 +22,7 @@ export const GeneratedLetterStep = ({
 }: GeneratedLetterStepProps) => {
   const handleSettingChange = (
     field: keyof GenerationSettings,
-    value: string | boolean
+    value: string | boolean | number
   ) => {
     onUpdateSettings({
       ...generationSettings,
@@ -200,6 +200,61 @@ export const GeneratedLetterStep = ({
                     </div>
                   </button>
                 ))}
+              </div>
+            </div>
+
+            {/* Temperature */}
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <h3 className="font-semibold text-gray-900 mb-4">
+                Creativity Level
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Temperature</span>
+                  <span className="text-sm font-medium text-gray-900">
+                    {generationSettings.temperature.toFixed(1)}
+                  </span>
+                </div>
+                <div className="relative">
+                  <input
+                    type="range"
+                    min="0"
+                    max="2"
+                    step="0.1"
+                    value={generationSettings.temperature}
+                    onChange={(e) =>
+                      handleSettingChange(
+                        "temperature",
+                        parseFloat(e.target.value)
+                      )
+                    }
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                    style={{
+                      background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
+                        (generationSettings.temperature / 2) * 100
+                      }%, #e5e7eb ${
+                        (generationSettings.temperature / 2) * 100
+                      }%, #e5e7eb 100%)`,
+                    }}
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>Conservative (0)</span>
+                    <span>Balanced (1)</span>
+                    <span>Creative (2)</span>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-500">
+                  {generationSettings.temperature <= 0.3 &&
+                    "Very conservative and predictable"}
+                  {generationSettings.temperature > 0.3 &&
+                    generationSettings.temperature <= 0.7 &&
+                    "Balanced creativity and consistency"}
+                  {generationSettings.temperature > 0.7 &&
+                    generationSettings.temperature <= 1.2 &&
+                    "More creative and varied"}
+                  {generationSettings.temperature > 1.2 &&
+                    "Highly creative and unpredictable"}
+                </p>
               </div>
             </div>
 

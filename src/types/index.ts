@@ -51,6 +51,7 @@ export interface GenerationSettings {
     | "italian"
     | "dutch"
     | "portuguese";
+  temperature: number; // 0-2, controls creativity/randomness
 }
 
 export type Step =
